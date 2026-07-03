@@ -1,4 +1,4 @@
-<img width="1913" height="1012" alt="image" src="https://github.com/user-attachments/assets/22e5c409-f019-4cf0-a344-4d395d276efa" /># 🏷️ Label Generator Desktop
+# 🏷️ Label Generator Desktop
 ## Automação de criação de etiquetas promocionais
 
 📌 Sobre o projeto
@@ -53,7 +53,7 @@ Redução de retrabalho e erros humanos
 📸 Demonstração
 🖥️ Interface do sistema
 
-![Tela inicial](screenshots/tela-inicial.png)
+<img width="1913" height="1012" alt="image" src="https://github.com/user-attachments/assets/22e5c409-f019-4cf0-a344-4d395d276efa" />
 
 📊 Importação de planilha Excel
 
