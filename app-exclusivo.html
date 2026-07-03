@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Ofertas APP</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-EXTRALIGHT.otf')format('opentype');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-LIGHT.otf')format('opentype');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-REGULAR.otf')format('opentype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-SEMIBOLD.otf')format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-BOLD.otf')format('opentype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-EXTRABOLD.otf')format('opentype');
+    font-weight: 600;
+}
+
+
+
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-black.otf') format('opentype');
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-bold.otf') format('opentype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-extrabold.otf') format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-extralight.otf') format('opentype');
+  font-weight: 200;
+  
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-light.otf') format('opentype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-semibold.otf')format('opentype');
+  font-weight: 500;
+}
+
+.menu{
+    background: white;
+    width: auto;
+    text-align: center;
+    align-items: center;
+    height: 350px;
+    border-radius: 3px;
+    margin-top: 80px;
+}
+
+.bloco-titulo{
+    margin-top: 50px;
+    padding: 30px;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.text-titulo{
+    font-size: 40px;
+    font-family: 'AFTIKASOFT';
+    font-weight: 500;
+    padding: 50px;
+    color: #0da7d6;
+}
+
+.bloco-opmenu{
+    padding: 30px;
+}
+
+.btn-gerar{
+    background-color: #0da7d6; /* azul */
+    color: white;
+    border: none;
+    font-family: 'AFTIKASOFT';
+    font-weight: 100;
+}
+
+.btn-gerar:hover{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+}
+
+.btn-pdf{
+    background-color: #0da7d6; /* azul */
+    color: white;
+    border: none;
+}
+
+.btn-pdf:hover{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+}
+
+.btn-limpar{
+    background-color: #0da7d6; /* azul */
+    color: white;
+    border: none;
+}
+
+.btn-limpar:hover{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+}
+
+
+/* =========================
+   ===== BASE =====
+========================= */
+body{ background:#f5f6fa; }
+
+.btn-meu{
+    background:#0089c4;
+    color:white;
+    margin-top:10px;
+}
+
+/* =========================
+   ===== Etiqueta TAMANHO P (SEU ORIGINAL)
+========================= */
+.etiqueta-p{
+  width: 64mm;
+  height: 145mm;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* =========================
+   ===== TAMANHO P (SEU ORIGINAL)
+========================= */
+
+.p .folha{
+    width:21cm;
+    min-height:29.7cm;
+    display:flex;
+    flex-wrap:wrap;
+    background:white;
+    margin:auto;
+    gap:24px;
+}
+
+/* ===== LOGO ===== */
+
+
+/* LINHA */
+.p .linha-pontilhada{
+  border-bottom: 1px dotted #000;
+  margin: 13px 0;
+  margin-bottom: 100px;
+}
+
+
+/* DESCRIÇÃO */
+.p .bloco-descricao{
+    margin-top: -250px;
+}
+
+.p .descricao-curta { font-size: 16px; color: black; font-weight: bold;}
+.p .descricao-media { font-size: 14px; color:black; font-weight: bold;}
+.p .descricao-longa { font-size: 13px; color:black; font-weight: bold;}
+
+/* EAN */
+
+.p .bloco-ean{
+ margin-top: -180px;
+ margin-bottom: 20px;
+}
+
+.p .text-ean{
+    font-family: 'AFTIKASOFT';
+    color: black;
+}
+
+/* Validade */
+.p .bloco-validade{
+    margin-top: -200px;
+}
+
+.p .text-validade{
+    font-family: 'AFTIKASOFT';
+    font-size: 9px;
+    color: black;
+}
+
+
+/* PREÇO NORMAL */
+.p .bloco-preco{
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.p .bloco-de{
+    padding-left: 2px;
+    padding-top: 30px;
+    /*border: solid 1px pink;*/
+}
+
+.p .text-de{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 20px;
+    color: black;
+}
+
+.p .bloco-moeda{
+    margin-top: -10px;
+    margin-left: 2px;
+    /*border: solid 1px brown;*/
+}
+
+.p .text-moeda{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 20px;
+    color: black;
+}
+
+.p .bloco-reais{
+    /*border: solid 1px greenyellow;*/
+    margin-top: -80px;
+    margin-bottom: 50px;
+}
+
+.p .bloco-centavos{
+    /*border: solid 1px orange;*/
+    margin-left: 170px;
+    margin-top: -145px;
+    color: black;
+}
+
+.p .text-centavos{
+    font-family: 'AFTIKASOFT';
+    font-size: 30px;
+    font-weight: 400;
+    color: black;
+}
+
+.p .bloco-cada{
+    margin-left: 175px;
+    margin-top: -12px;
+    color: black;
+}
+
+.p .bloco-prcada{
+    margin-left: 175px;
+    margin-top: -5px;
+}
+
+.p .text-cada{
+    font-family: 'AFTIKASOFT';
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.p .text-prcada{
+    font-family: 'AFTIKASOFT';
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.p .preco-pequeno { 
+    font-size: 80px; 
+    font-weight: bold;
+    color: black; 
+    margin-left: 123px;
+}
+
+.p .preco-medio { 
+    font-size: 80px; 
+    font-weight: bold;
+    color: black;
+    margin-left: 77px;
+}
+
+.p .preco-grande { 
+    font-size: 80px; 
+    font-weight: bold;
+    color: black;
+    margin-left: 32px;
+    margin-top: -70px;
+}
+
+/* PREÇO PROMO */
+/* PROMO */
+.p .bloco-promo{
+  background: black;
+  margin-top:-120px;
+  height: 344px;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+  margin-left: 13px;
+}   
+
+.p .bloco-por{
+    padding-top: 90px;
+}
+
+.p .text-por{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.p .text-prmoeda{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.p .preco-promo-pequeno { 
+    font-size: 70px; 
+    font-weight: bold;
+    color: white; 
+    margin-left: 131px;
+}
+
+.p .preco-promo-medio { 
+    font-size: 70px; 
+    font-weight: bold;
+    color: white;
+    margin-left: 90px; 
+}
+
+.p .preco-promo-grande { 
+    font-size: 70px; 
+    font-weight: bold;
+    color: white;
+    margin-left: 52px;
+    margin-top: -50px;
+}
+
+.p .bloco-prreias{
+    margin-top: -88px;
+  
+}
+
+.p .bloco-prcentavos{
+    margin-left: 175px;
+    margin-top: -75px;
+    color: black;
+}
+
+.p .text-prcentavos{
+     font-family: 'AFTIKASOFT';
+     font-size: 22px;
+     font-weight: 400;
+     color: black;
+}
+
+/* LOGO (CORRIGIDO) */
+.p .bloco-logo{
+  border: 1px solid black;
+  border-radius: 6px;
+  width: 80%;
+  height: 25mm;
+  bottom: 180px;
+  left: 15px;
+  background: white;
+  margin-top: -80px;
+  margin-left: 20px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.p .bloco-logo img{
+ width: 95%;
+ height: auto;
+ margin-top: 5px;
+ margin-left: 5px;
+ padding: 10px;
+}
+
+/* =========================
+   ===== TAMANHO M (SEU ORIGINAL)
+========================= */
+/* ETIQUETA */
+.etiqueta-m {
+    width: 9.8cm;
+    height: 14cm;
+    border: 1px solid #000;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-inside: avoid;
+}
+
+.m .folha{
+    width:21cm;
+    min-height:29.7cm;
+    display:flex;
+    flex-wrap:wrap;
+    background:white;
+    margin:auto;
+    gap:30px;
+}
+
+/* ===== LOGO ===== */
+
+
+/* LINHA */
+.m .linha-pontilhada{
+  border-bottom: 1px dotted #000;
+  margin: 13px 0;
+}
+
+
+/* DESCRIÇÃO */
+.m .bloco-descricao{
+    margin-top: -10px;
+}
+
+.m .descricao-curta { font-size: 22px; color: black; font-weight: bold;}
+.m .descricao-media { font-size: 22px; color:black; font-weight: bold;}
+.m .descricao-longa { font-size: 22px; color:black; font-weight: bold;}
+
+/* EAN */
+
+.m .bloco-ean{
+ margin-top: -25px;
+}
+
+.m .text-ean{
+    font-family: 'AFTIKASOFT';
+
+}
+
+/* Validade */
+.m .bloco-validade{
+    margin-top: -30px;
+    margin-bottom: 20px;
+}
+
+.m .text-validade{
+    font-family: 'AFTIKASOFT';
+    font-size: 12px;
+}
+
+
+/* PREÇO NORMAL */
+.m .bloco-preco{
+  margin-top: -20px;
+  margin-bottom: 50px;
+
+}
+
+.m .bloco-de{
+    padding-left: 2px;
+    margin-top: -10px;
+    /*border: solid 1px pink;*/
+}
+
+.m .text-de{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.m .bloco-moeda{
+    margin-top: -15px;
+    margin-left: 2px;
+    /*border: solid 1px brown;*/
+}
+
+.m .text-moeda{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.m .bloco-reais{
+    /*border: solid 1px greenyellow;*/
+    margin-top: -110px;
+    margin-bottom: 70px;
+}
+
+.m .bloco-centavos{
+    /*border: solid 1px orange;*/
+    margin-left: 250px;
+    margin-top: -177px;
+}
+
+.m .text-centavos{
+    font-family: 'AFTIKASOFT';
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.m .bloco-cada{
+    margin-left: 255px;
+    margin-top: -12px;
+}
+
+.m .text-cada{
+    font-family: 'AFTIKASOFT';
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.m .preco-pequeno { 
+    font-size: 90px; 
+    font-weight: bold;
+    color: black; 
+    margin-left: 190px;
+}
+
+.m .preco-medio { 
+    font-size: 90px; 
+    font-weight: bold;
+    color: black;
+    margin-left: 140px;
+}
+
+.m .preco-grande { 
+    font-size: 90px; 
+    font-weight: bold;
+    color: black;
+    margin-left: 90px;
+
+}
+
+/* PREÇO PROMO */
+/* PROMO */
+.m .bloco-promo{
+  background: black;
+  margin-top:-30px;
+  height: 200px;
+  color: white;
+  padding: 10px;
+}   
+
+.m .bloco-por{
+    padding-top: 90px;
+}
+
+.m .text-por{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 30px;
+}
+.m .bloco-prmoeda{
+    margin-top: -10px;
+    margin-left: 2px;
+
+}
+
+.m .text-prmoeda{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.m .preco-promo-pequeno { 
+    font-size: 90px; 
+    font-weight: bold;
+    color: white; 
+    margin-left: 191px;
+}
+
+.m .preco-promo-medio { 
+    font-size: 90px; 
+    font-weight: bold;
+    color: white;
+    margin-left: 140px; 
+}
+
+.m .preco-promo-grande { 
+    font-size: 90px; 
+    font-weight: bold;
+    color: white;
+    margin-left: 92px;
+
+
+}
+
+.m .bloco-prreias{
+    margin-top: -115px;
+
+}
+
+.m .bloco-prcentavos{
+    margin-left:250px;
+    margin-top: -100px;
+
+}
+
+.m .text-prcentavos{
+     font-family: 'AFTIKASOFT';
+     font-size: 35px;
+     font-weight: 400;
+}
+
+/* LOGO (CORRIGIDO) */
+.m .bloco-logo{
+  border: 1px solid black;
+  border-radius: 6px;
+  width: 80%;
+  height: 20mm;
+  bottom: 180px;
+  left: 15px;
+  background: white;
+  margin-top: -190px;
+  margin-left: 30px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.m .bloco-logo img{
+ width: 75%;
+ height: auto;
+ margin-left: 35px;
+}
+
+/* =========================
+   ===== TAMANHO G (SEU ORIGINAL)
+========================= */
+/* ETIQUETA */
+.etiqueta-g {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-inside: avoid;
+}
+
+.g .folha{
+    width: 20.7cm;
+    height: 29.2cm; /*  fixa altura */
+    margin: 0 auto;
+    background: white;
+    box-sizing: border-box;
+    padding:5mm; /*  margem de segurança */
+    page-break-after: always;
+}
+
+/* ===== LOGO ===== */
+
+
+/* LINHA */
+.g .linha-pontilhada{
+  border-bottom: 1px dotted #000;
+  margin: 40px 0;
+}
+
+
+/* DESCRIÇÃO */
+.g .bloco-descricao{
+    margin-top: -70px;
+}
+
+.g .descricao-curta { font-size: 40px; color: black; font-weight: bold;}
+.g .descricao-media { font-size: 40px; color:black; font-weight: bold;}
+.g .descricao-longa { font-size: 40px; color:black; font-weight: bold;}
+
+/* EAN */
+
+.g .bloco-ean{
+ margin-top: -100px;
+}
+
+.g .text-ean{
+    font-family: 'AFTIKASOFT';
+    font-size: 30px;
+}
+
+/* Validade */
+.g .bloco-validade{
+    margin-top: -120px;
+    margin-bottom: 20px;
+}
+
+.g .text-validade{
+    font-family: 'AFTIKASOFT';
+    font-size: 25px;
+}
+
+
+/* PREÇO NORMAL */
+.g .bloco-preco{
+  margin-top: -190px;
+  margin-bottom: 50px;
+
+}
+
+.g .bloco-de{
+    padding-left: 2px;
+    margin-top: 70px;
+    /*border: solid 1px pink;*/
+}
+
+.g .text-de{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.g .bloco-moeda{
+    margin-top: -15px;
+    margin-left: 2px;
+    /*border: solid 1px brown;*/
+}
+
+.g .text-moeda{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.g .bloco-reais{
+    /*border: solid 1px greenyellow;*/
+    margin-top: -200px;
+    margin-bottom: 70px;
+}
+
+.g .bloco-centavos{
+    /*border: solid 1px orange;*/
+    margin-left: 490px;
+    margin-top: -320px;
+}
+
+.g .text-centavos{
+    font-family: 'AFTIKASOFT';
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.g .bloco-cada{
+    margin-left: 500px;
+    margin-top: -12px;
+}
+
+.g .text-cada{
+    font-family: 'AFTIKASOFT';
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.g .preco-pequeno { 
+    font-size: 210px; 
+    font-weight: bold;
+    color: black; 
+    margin-left: 364px;
+}
+
+.g .preco-medio { 
+    font-size: 210px; 
+    font-weight: bold;
+    color: black;
+    margin-left: 242px;
+}
+
+.g .preco-grande { 
+    font-size: 210px; 
+    font-weight: bold;
+    color: black;
+    margin-left: 124px;
+
+}
+
+/* PREÇO PROMO */
+/* PROMO */
+.g .bloco-promo{
+  background: black;
+  margin-top:-30px;
+  height: 300px;
+  color: white;
+  padding: 10px;
+}   
+
+.g .bloco-por{
+    padding-top: 90px;
+}
+
+.g .text-por{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 30px;
+}
+.g .bloco-prmoeda{
+    margin-top: -10px;
+    margin-left: 2px;
+
+}
+
+.g .text-prmoeda{
+    font-family: 'AFTIKASOFT';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.g .preco-promo-pequeno { 
+    font-size: 210px; 
+    font-weight: bold;
+    color: white; 
+    margin-left: 371px;
+}
+
+.g .preco-promo-medio { 
+    font-size: 210px; 
+    font-weight: bold;
+    color: white;
+    margin-left: 250px; 
+}
+
+.g .preco-promo-grande { 
+    font-size: 210px; 
+    font-weight: bold;
+    color: white;
+    margin-left: 130px;
+
+
+}
+
+.g .bloco-prreias{
+    margin-top: -170px;
+
+}
+
+.g .bloco-prcentavos{
+    margin-left:500px;
+    margin-top: -245px;
+
+}
+
+.g .text-prcentavos{
+     font-family: 'AFTIKASOFT';
+     font-size: 80px;
+     font-weight: 400;
+}
+
+/* LOGO (CORRIGIDO) */
+.g .bloco-logo{
+  border: 1px solid black;
+  border-radius: 6px;
+  width: 80%;
+  height: 40mm;
+  bottom: 180px;
+  left: 15px;
+  background: white;
+  margin-top: -430px;
+  margin-left: 70px;
+  justify-content: center;
+  overflow: hidden;
+padding: 10px;
+}
+
+.g .bloco-logo img{
+ width: 75%;
+ height: auto;
+ margin-left: 35px;
+ align-items: center;
+ text-align: center;
+
+}
+
+/* =========================
+   ===== NAVBAR SUPERIOR
+========================= */
+
+.topbar{
+    width: 100%;
+    height: 60px;
+
+    background: #0089c4;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 99999;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+
+/* botão voltar */
+.btn-voltar{
+    background: white;
+    color: #0089c4;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 8px 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-voltar:hover{
+    background: #f1f1f1;
+}
+
+/* menu dropdown */
+.menu-dropdown{
+    position: relative;
+}
+
+.btn-menu{
+    background: white;
+    color: #0089c4;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 8px 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* submenu */
+.submenu{
+    position: absolute;
+
+    top: 100%;
+    right: 0;
+
+    background: white;
+
+    width: 240px;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+
+    display: none;
+
+    margin-top: 2px;
+
+    z-index: 999999;
+}
+
+/* mostrar hover */
+.menu-dropdown:hover .submenu{
+    display: block;
+}
+
+.submenu a{
+    display: block;
+
+    padding: 14px 18px;
+
+    color: #333;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: .2s;
+}
+
+.submenu a:hover{
+    background: #f5f5f5;
+    color: #0089c4;
+}
+
+/* =========================
+   ===== BOTÃO TOPO
+========================= */
+
+.btn-topo{
+
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #0089c4;
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: none;
+
+    z-index: 999999;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.25);
+
+    transition: .3s;
+}
+
+.btn-topo:hover{
+
+    transform: translateY(-3px);
+
+    background: #006fa1;
+}
+
+.p .bloco-qrcode{
+    width: 106px;
+    margin-left:40px;
+    margin-top: 10px;
+    background:white;
+    padding:3px;
+    border-radius: 3px;
+    border-bottom: 20px;
+}
+
+.m .bloco-qrcode{
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    background:white;
+    padding:3px;
+    height: 100px;
+}
+
+.qrcode{
+    width: 100px;
+}
+
+.g .bloco-qrcode{
+    position:absolute;
+    right:20px;
+    bottom:20px;
+    background:white;
+    padding:5px;
+}
+.p .frase{
+    position: relative;
+    font-weight: bold;
+    margin-top: 25px;
+    font-size: 18px;
+    padding: 8px;
+    text-align: center;
+    line-height: 1.1;
+}
+.p .frase2{
+    position: relative;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 8px;
+    text-align: center;
+    line-height: 1.1;
+}
+.p .promo.centavos{
+    color: black;
+}
+</style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+<div class="topbar">
+
+    <!-- VOLTAR -->
+    <button class="btn-voltar" onclick="voltarPagina()">
+        ← Voltar
+    </button>
+
+    <!-- MENU -->
+    <div class="menu-dropdown">
+
+    <button class="btn-menu" onclick="toggleMenu()">
+        ☰ Menu
+    </button>
+
+    <div class="submenu" id="submenu">
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="leve-mais.html">
+            Etiquetas Leve + por -
+        </a>
+
+        <a href="combine-ganhe.html">
+            Etiquetas Combine e Ganhe
+        </a>
+        <a href="desconto_progressivo.html">
+            Etiquetas Desconto Progressivo
+        </a>
+
+    </div>
+
+</div>
+</div>
+
+<div class="container mt-4">
+
+    <!-- INICIO DO MENU PRINCIPAL -->
+
+    <div class="menu">
+
+        <div class="bloco-titulo">
+            <span class="text-titulo">Ofertas APP</span>
+        </div>
+        
+        <div class="bloco-opmenu">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="file" id="input-excel" class="form-control">
+            </div>
+         
+            <div class="col-md-4">
+                <select id="tamanho" class="form-control">
+                    <option value="">Selecione</option>
+                    <option value="p">P</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <button onclick="gerar()" class="btn btn-gerar btn-block">Gerar</button>
+            </div>
+            <div class="col-md-4">
+                <button onclick="gerarPDF()" class="btn btn-pdf btn-block">PDF</button>
+            </div>
+            <div class="col-md-4">
+                <button onclick="limpar()" class="btn btn-limpar btn-block">Limpar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div><!--FIM DO MENU PRINCIPAL-->
+
+
+<div id="area-pdf" class="mt-4"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+
+let dadosExcel = [];
+let logoBase64 = "";
+
+/* ===== EXCEL ===== */
+document.getElementById('input-excel').addEventListener('change', function(e){
+    const reader = new FileReader();
+    reader.onload = function(evt){
+        const data = new Uint8Array(evt.target.result);
+        const workbook = XLSX.read(data,{type:'array'});
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        dadosExcel = XLSX.utils.sheet_to_json(sheet);
+    };
+    reader.readAsArrayBuffer(e.target.files[0]);
+});
+
+/* ===== LOGO ===== */
+document.getElementById('input-logo').addEventListener('change', function(e){
+    const reader = new FileReader();
+    reader.onload = function(evt){
+        logoBase64 = evt.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+});
+
+/* ===== FUNÇÕES AUXILIARES ===== */
+function formatarData(data){
+
+    if(!data) return "";
+
+    // DATA VINDO DO EXCEL
+    if(typeof data === "number"){
+
+        const excelDate = XLSX.SSF.parse_date_code(data);
+
+        const dia = String(excelDate.d).padStart(2,'0');
+        const mes = String(excelDate.m).padStart(2,'0');
+        const ano = excelDate.y;
+
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    // STRING
+    const d = new Date(data);
+
+    if(isNaN(d)) return data;
+
+    const dia = String(d.getDate()).padStart(2,'0');
+    const mes = String(d.getMonth() + 1).padStart(2,'0');
+    const ano = d.getFullYear();
+
+    return `${dia}/${mes}/${ano}`;
+}
+
+// descrição dinâmica
+function classificarDescricao(texto){
+    texto = String(texto || "");
+
+    if(texto.length <= 20) return "descricao-curta";
+    if(texto.length <= 35) return "descricao-media";
+    return "descricao-longa";
+}
+
+// separar preço
+function separarPreco(valor){
+    if(!valor) return { reais: "0", centavos: "00" };
+
+    valor = String(valor).replace(",", ".");
+    let numero = Number(valor).toFixed(2);
+    let partes = numero.split(".");
+
+    return {
+        reais: partes[0],
+        centavos: partes[1]
+    };
+}
+
+// tamanho do preço (DE)
+function classificarPreco(reais){
+    reais = String(reais || "0");
+
+    if(reais.length <= 1) return "preco-pequeno";
+    if(reais.length === 2) return "preco-medio";
+    return "preco-grande";
+}
+
+// tamanho do preço PROMO
+function classificarPrecoPromo(reais){
+    reais = String(reais || "0");
+
+    if(reais.length <= 1) return "preco-promo-pequeno";
+    if(reais.length === 2) return "preco-promo-medio";
+    return "preco-promo-grande";
+}
+
+/* ===== GERAR ===== */
+function gerar(){
+    const tipo = document.getElementById('tamanho').value;
+    const area = document.getElementById('area-pdf');
+
+    if(!tipo || dadosExcel.length === 0){
+        alert("Importe planilha e selecione tamanho");
+        return;
+    }
+
+    area.className = tipo;
+    area.innerHTML = "";
+    
+
+    let etiquetasPorFolha = 1;
+    if(tipo === "p") etiquetasPorFolha = 6;
+    if(tipo === "m") etiquetasPorFolha = 4;
+    if(tipo === "g") etiquetasPorFolha = 1;
+
+    let contador = 0;
+    let folha = `<div class="folha">`;
+
+    dadosExcel.forEach((item, index) => {
+
+        if(tipo === "p") folha += criarEtiquetaP(item);
+        else if(tipo === "m") folha += criarEtiquetaM(item);
+        else if(tipo === "g") folha += criarEtiquetaG(item);
+
+        contador++;
+
+        if(contador === etiquetasPorFolha || index === dadosExcel.length - 1){
+            folha += `</div>`;
+            area.innerHTML += folha;
+            folha = `<div class="folha">`;
+            contador = 0;
+        }
+        
+    });
+    setTimeout(() => {
+
+    document.querySelectorAll('[id^="qrcode-"]').forEach(div => {
+
+        new QRCode(div, {
+            text: "https://onelink.to/2h88c4",
+            width: 100,
+            height: 100
+        });
+
+    });
+
+}, 100);
+}
+
+/* ===== ETIQUETA P ===== */
+function criarEtiquetaP(item){
+
+    const preco = separarPreco(item.preco);
+    const promo = separarPreco(item.preco_promocional);
+
+    return `
+<div class="etiqueta-p">
+    <div class="linha-pontilhada"></div>
+    
+    <div class="bloco-descricao">
+    <div class="${classificarDescricao(item.descricao)}">
+        ${item.descricao || ""}
+    </div>
+    </div>
+
+    <div class="bloco-ean">
+        <span class="text-ean">EAN: ${item.ean || ""}</span>
+        </div>
+        <div class="bloco-validade">
+            <span class="text-validade">*Oferta válida de ${formatarData(item.data_inicio)} até ${formatarData(item.data_fim)}</span>
+            </div>
+
+  
+
+    <!-- PREÇO PROMO -->
+        
+    <div class="bloco-promo">
+
+       
+
+                                      
+                        <div class="frase">Oferta exclusiva para compras no APLICATIVO!</div>
+                        <div class="bloco-qrcode">
+                        <div id="qrcode-${item.ean}"></div>
+                        </div>
+                        <div class="frase2">
+                            Escaneie o QR Code para conferir!
+                            </div>
+    </div>
+          
+     
+  
+
+</div>
+`;
+}
+
+/* ===== ETIQUETA M ===== */
+function criarEtiquetaM(item){
+    const preco = separarPreco(item.preco);
+    const promo = separarPreco(item.preco_promocional);
+
+    return `
+<div class="etiqueta-m">
+    <div class="linha-pontilhada"></div>
+    
+    <div class="bloco-descricao">
+    <div class="${classificarDescricao(item.descricao)}">
+        ${item.descricao || ""}
+    </div>
+    </div>
+
+    <div class="bloco-ean">
+        <span class="text-ean">EAN: ${item.ean || ""}</span>
+        </div>
+        <div class="bloco-validade">
+            <span class="text-validade">*Oferta válida de ${formatarData(item.data_inicio)} até ${formatarData(item.data_fim)}</span>
+            </div>
+
+    <!-- PREÇO NORMAL -->
+    <div class="bloco-preco">
+
+        <div class="bloco-de">
+            <span class="text-de">DE</span>
+            </div>
+
+            <div class="bloco-moeda">
+                <span class="text-moeda">R$</span>
+                </div>
+                
+                <div class="bloco-reais">
+                    <span class="${classificarPreco(preco.reais)}">${preco.reais}</span>
+                    </div>
+
+                    <div class="bloco-centavos">
+                        <span class="text-centavos">,${preco.centavos}</span>
+                        </div>
+
+                        <div class="bloco-cada">
+                            <span class="text-cada">CADA</span>
+                            </div>
+
+                            </div>
+
+    <!-- PREÇO PROMO -->
+        
+    <div class="bloco-promo">
+
+        <div class="bloco-por">
+            <span class="text-por">POR</span>
+            </div>
+
+            <div class="bloco-prmoeda">
+                <span class="text-prmoeda">R$</span>
+                </div>
+
+                <div class="bloco-prreias">
+                    <span class="${classificarPrecoPromo(promo.reais)}">${promo.reais}</span>
+                    </div>
+
+                    <div class="bloco-prcentavos">
+                    <span class="text-prcentavos">,${promo.centavos}</span>
+                    </div>
+
+                    <div class="bloco-cada">
+                            <span class="text-cada">CADA</span>
+                            </div>
+                     
+                   
+    </div>
+          
+     
+  
+
+</div>
+`;
+}
+
+/* ===== ETIQUETA G ===== */
+function criarEtiquetaG(item){
+ const preco = separarPreco(item.preco);
+    const promo = separarPreco(item.preco_promocional);
+
+    return `
+<div class="etiqueta-g">
+    <div class="linha-pontilhada"></div>
+    
+    <div class="bloco-descricao">
+    <div class="${classificarDescricao(item.descricao)}">
+        ${item.descricao || ""}
+    </div>
+    </div>
+
+    <div class="bloco-ean">
+        <span class="text-ean">EAN: ${item.ean || ""}</span>
+        </div>
+        <div class="bloco-validade">
+            <span class="text-validade">*Oferta válida de ${formatarData(item.data_inicio)} até ${formatarData(item.data_fim)}</span>
+            </div>
+
+    <!-- PREÇO NORMAL -->
+    <div class="bloco-preco">
+
+        <div class="bloco-de">
+            <span class="text-de">DE</span>
+            </div>
+
+            <div class="bloco-moeda">
+                <span class="text-moeda">R$</span>
+                </div>
+                
+                <div class="bloco-reais">
+                    <span class="${classificarPreco(preco.reais)}">${preco.reais}</span>
+                    </div>
+
+                    <div class="bloco-centavos">
+                        <span class="text-centavos">,${preco.centavos}</span>
+                        </div>
+
+                        <div class="bloco-cada">
+                            <span class="text-cada">CADA</span>
+                            </div>
+
+                            </div>
+
+    <!-- PREÇO PROMO -->
+        
+    <div class="bloco-promo">
+
+        <div class="bloco-por">
+            <span class="text-por">POR</span>
+            </div>
+
+            <div class="bloco-prmoeda">
+                <span class="text-prmoeda">R$</span>
+                </div>
+
+                <div class="bloco-prreias">
+                    <span class="${classificarPrecoPromo(promo.reais)}">${promo.reais}</span>
+                    </div>
+
+                    <div class="bloco-prcentavos">
+                    <span class="text-prcentavos">,${promo.centavos}</span>
+                    </div>
+
+                    <div class="bloco-cada">
+                            <span class="text-cada">CADA</span>
+                            </div>
+
+                     
+                    <div class="bloco-logo">
+                        <img src="${logoBase64 || 'img/super-oferta.png'}" class="logo">
+                        </div>
+    </div>
+          
+     
+  
+
+</div>
+`;
+}
+
+/* ===== PDF ===== */
+function gerarPDF(){
+    const element = document.getElementById('area-pdf');
+
+    html2pdf().set({
+        margin:0,
+        filename:'etiquetas.pdf',
+        html2canvas:{scale:2},
+        jsPDF:{unit:'cm',format:'a4'}
+    }).from(element).save();
+
+    
+}
+
+/* ===== LIMPAR ===== */
+function limpar(){
+    dadosExcel = [];
+    logoBase64 = "";
+
+    document.getElementById('input-excel').value = "";
+    document.getElementById('input-logo').value = "";
+    document.getElementById('tamanho').value = "";
+
+    document.getElementById('area-pdf').innerHTML = "";
+}
+
+function voltarPagina(){
+
+    window.history.back();
+
+}
+
+function toggleMenu(){
+
+    const menu = document.getElementById("submenu");
+
+    if(menu.style.display === "block"){
+
+        menu.style.display = "none";
+
+    }else{
+
+        menu.style.display = "block";
+    }
+
+}
+
+/* fecha clicando fora */
+document.addEventListener("click", function(event){
+
+    const menu = document.getElementById("submenu");
+
+    const botao = document.querySelector(".btn-menu");
+
+    if(
+        !menu.contains(event.target)
+        &&
+        !botao.contains(event.target)
+    ){
+        menu.style.display = "none";
+    }
+
+});
+/* =========================
+   ===== BOTÃO TOPO
+========================= */
+
+window.addEventListener("scroll", function(){
+
+    const botao = document.getElementById("btnTopo");
+
+    if(window.scrollY > 300){
+
+        botao.style.display = "block";
+
+    }else{
+
+        botao.style.display = "none";
+    }
+
+});
+
+function voltarTopo(){
+
+    window.scrollTo({
+
+        top: 0,
+        behavior: "smooth"
+
+    });
+
+}
+new QRCode(
+    document.getElementById("qrcode"),
+    "https://seuapp.com.br"
+);
+</script>
+<!-- BOTÃO VOLTAR TOPO -->
+<button class="btn-topo" id="btnTopo" onclick="voltarTopo()">
+    ↑
+</button>
+</body>
+</html>

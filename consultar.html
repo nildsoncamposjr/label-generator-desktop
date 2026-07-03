@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Consulta de Produtos</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+
+/* =========================
+   BASE
+========================= */
+
+body{
+    background: #f5f6fa;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topo{
+    width: 100%;
+    background: #0089c4;
+    padding: 18px 30px;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+
+.topo h2{
+    margin: 0;
+    font-size: 28px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container-consulta{
+    width: 95%;
+    margin: 30px auto;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card-consulta{
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 25px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+/* =========================
+   UPLOAD
+========================= */
+
+.bloco-upload{
+
+    background: #eef7fb;
+
+    border: 2px dashed #0089c4;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.input-planilha{
+    margin-top: 15px;
+}
+
+/* =========================
+   SELECTS
+========================= */
+
+label{
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+/* =========================
+   BUSCA
+========================= */
+
+.input-busca{
+    height: 45px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   TABELA
+========================= */
+
+.table thead{
+    background: #0089c4;
+    color: white;
+}
+
+.table td{
+    vertical-align: middle;
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.check-produto{
+    width: 18px;
+    height: 18px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn-acao{
+    background: #0089c4;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    margin-right: 10px;
+    transition: .2s;
+}
+
+.btn-acao:hover{
+    background: #006fa1;
+    color: white;
+}
+
+/* =========================
+   TAG PROMO
+========================= */
+
+.tag-promo{
+
+    background: #d4edda;
+
+    color: #155724;
+
+    padding: 5px 10px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.rodape-info{
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- TOPO -->
+<div class="topo">
+
+    <h2>Consulta de Produtos</h2>
+
+</div>
+
+<!-- CONTAINER -->
+<div class="container-consulta">
+
+    <div class="card-consulta">
+
+        <!-- UPLOAD -->
+        <div class="bloco-upload">
+
+            <h4>
+                Importar Planilha Excel
+            </h4>
+
+            <p>
+                Selecione uma planilha .xlsx para carregar os produtos.
+            </p>
+
+            <input 
+                type="file"
+                id="inputExcel"
+                class="form-control input-planilha"
+                accept=".xlsx,.xls"
+            >
+
+        </div>
+
+        <!-- CONFIGURAÇÕES -->
+        <div class="row mb-4">
+
+            <!-- TIPO -->
+            <div class="col-md-6">
+
+                <label>
+                    Tipo de Etiqueta
+                </label>
+
+                <select 
+                    class="form-control"
+                    id="tipoEtiqueta"
+                >
+
+                    <option value="">
+                        Selecione
+                    </option>
+
+                    <option value="depor">
+                        De | Por
+                    </option>
+
+                    <option value="leve">
+                        Leve Mais por Menos
+                    </option>
+
+                    <option value="combine">
+                        Combine e Ganhe
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- TAMANHO -->
+            <div class="col-md-6">
+
+                <label>
+                    Tamanho da Etiqueta
+                </label>
+
+                <select 
+                    class="form-control"
+                    id="tamanhoEtiqueta"
+                >
+
+                    <option value="">
+                        Selecione
+                    </option>
+
+                    <option value="p">
+                        P
+                    </option>
+
+                    <option value="m">
+                        M
+                    </option>
+
+                    <option value="g">
+                        G
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- BUSCA -->
+        <input 
+            type="text"
+            class="form-control input-busca"
+            placeholder="Pesquisar produto..."
+            id="campoBusca"
+            onkeyup="filtrarProdutos()"
+        >
+
+        <!-- BOTÕES -->
+        <div class="mb-3">
+
+            <button 
+                class="btn-acao"
+                onclick="selecionarTodos()"
+            >
+                Selecionar Todos
+            </button>
+
+            <button 
+                class="btn-acao"
+                onclick="desmarcarTodos()"
+            >
+                Desmarcar Todos
+            </button>
+
+            <button 
+                class="btn-acao"
+                onclick="gerarEtiquetas()"
+            >
+                Gerar Etiquetas
+            </button>
+
+        </div>
+
+        <!-- TABELA -->
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th width="60">OK</th>
+                        <th>Produto</th>
+                        <th width="180">EAN</th>
+                        <th width="120">Promoção</th>
+                        <th width="120">Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelaProdutos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- INFO -->
+        <div class="rodape-info" id="infoProdutos">
+
+            Nenhum produto carregado.
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let dadosPlanilha = [];
+
+/* =========================
+   IMPORTAR PLANILHA
+========================= */
+
+document
+    .getElementById("inputExcel")
+    .addEventListener("change", lerPlanilha);
+
+function lerPlanilha(e){
+
+    const arquivo = e.target.files[0];
+
+    if(!arquivo) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(evt){
+
+        const workbook = XLSX.read(
+            evt.target.result,
+            {type:"binary"}
+        );
+
+        const sheet =
+            workbook.Sheets[
+                workbook.SheetNames[0]
+            ];
+
+        dadosPlanilha =
+            XLSX.utils.sheet_to_json(sheet);
+
+        renderizarTabela();
+
+    };
+
+    reader.readAsBinaryString(arquivo);
+
+}
+
+/* =========================
+   RENDERIZAR TABELA
+========================= */
+
+function renderizarTabela(){
+
+    let tbody =
+        document.getElementById("tabelaProdutos");
+
+    tbody.innerHTML = "";
+
+    dadosPlanilha.forEach((item,index)=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td align="center">
+
+                <input 
+                    type="checkbox"
+                    class="check-produto"
+                    checked
+                >
+
+            </td>
+
+            <td>
+                ${item.descricao || ""}
+            </td>
+
+            <td>
+                ${item.ean || ""}
+            </td>
+
+            <td>
+                R$ ${item.valor_promo || ""}
+            </td>
+
+            <td>
+
+                <span class="tag-promo">
+                    Ativo
+                </span>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("infoProdutos")
+        .innerHTML =
+        `${dadosPlanilha.length} produtos carregados.`;
+
+}
+
+/* =========================
+   FILTRO
+========================= */
+
+function filtrarProdutos(){
+
+    let input = document
+        .getElementById("campoBusca")
+        .value
+        .toLowerCase();
+
+    let linhas = document.querySelectorAll("#tabelaProdutos tr");
+
+    linhas.forEach(linha => {
+
+        let texto = linha.innerText.toLowerCase();
+
+        linha.style.display = texto.includes(input)
+            ? ""
+            : "none";
+
+    });
+
+}
+
+/* =========================
+   SELECIONAR TODOS
+========================= */
+
+function selecionarTodos(){
+
+    let checks =
+        document.querySelectorAll(".check-produto");
+
+    checks.forEach(check => {
+
+        check.checked = true;
+
+    });
+
+}
+
+/* =========================
+   DESMARCAR TODOS
+========================= */
+
+function desmarcarTodos(){
+
+    let checks =
+        document.querySelectorAll(".check-produto");
+
+    checks.forEach(check => {
+
+        check.checked = false;
+
+    });
+
+}
+
+/* =========================
+   GERAR ETIQUETAS
+========================= */
+
+function gerarEtiquetas(){
+
+    let tipo =
+        document.getElementById("tipoEtiqueta").value;
+
+    let tamanho =
+        document.getElementById("tamanhoEtiqueta").value;
+
+    if(!tipo){
+
+        alert("Selecione o tipo da etiqueta");
+        return;
+    }
+
+    if(!tamanho){
+
+        alert("Selecione o tamanho da etiqueta");
+        return;
+    }
+
+    let selecionados = [];
+
+    let checks =
+        document.querySelectorAll(".check-produto");
+
+    checks.forEach((check,index)=>{
+
+        if(check.checked){
+
+            selecionados.push(
+                dadosPlanilha[index]
+            );
+
+        }
+
+    });
+
+    console.log("Tipo:", tipo);
+
+    console.log("Tamanho:", tamanho);
+
+    console.log("Produtos:", selecionados);
+
+    alert(
+        `${selecionados.length} etiquetas preparadas`
+    );
+
+}
+
+</script>
+
+</body>
+</html>

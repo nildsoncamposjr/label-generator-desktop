@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Etiquetas</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+#etiquetas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.etiqueta{
+    width:280px;
+    background:white;
+    border:2px solid #000;
+    border-radius:12px;
+    padding:15px;
+    box-sizing:border-box;
+}
+
+.nome{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.de{
+    font-size:16px;
+    color:#777;
+    text-decoration:line-through;
+}
+
+.por{
+    font-size:36px;
+    color:red;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.info{
+    margin-top:10px;
+    font-size:12px;
+    color:#555;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Gerador de Etiquetas</h1>
+
+<div id="etiquetas"></div>
+
+<script>
+
+const url =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3FmQYyJceadfRvTZprhC7DRxkLA9tU3qeeiAxPcG8gauePBwbRVc7X2Yrrtw7bInBA4D7cYoNIrDs/pub?output=csv";
+
+fetch(url)
+.then(response => response.text())
+.then(csv => {
+
+    const etiquetas = document.getElementById("etiquetas");
+
+    // quebra linhas
+    const linhas = csv.trim().split("\n");
+
+    // pega cabeçalhos
+    const headers = linhas[0]
+        .replace(/\r/g, "")
+        .split(",")
+        .map(h => h.replace(/"/g, "").trim().toLowerCase());
+
+    // percorre linhas
+    linhas.slice(1).forEach(linha => {
+
+        linha = linha.replace(/\r/g, "");
+
+        // regex para CSV correto
+        const dados = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+
+        if(!dados) return;
+
+        const item = {};
+
+        headers.forEach((header, index) => {
+
+            item[header] = dados[index]
+                ?.replace(/"/g, "")
+                ?.trim();
+
+        });
+
+        if(!item.descricao) return;
+
+        etiquetas.innerHTML += `
+
+            <div class="etiqueta">
+
+                <div class="nome">
+                    ${item.descricao}
+                </div>
+
+                <div class="de">
+                    De: R$ ${item.de || ""}
+                </div>
+
+                <div class="por">
+                    R$ ${item.por_desc || ""}
+                </div>
+
+                <div class="info">
+                    EAN: ${item.ean || ""}
+                </div>
+
+                <div class="info">
+                    ${item.data_inicio || ""} até ${item.data_fim || ""}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+})
+.catch(error => {
+
+    document.body.innerHTML += `
+        <p style="color:red;">
+            ${error}
+        </p>
+    `;
+
+});
+
+</script>
+</body>
+</html>

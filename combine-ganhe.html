@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Combine e Ganhe</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+
+<style>
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-EXTRALIGHT.otf')format('opentype');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-LIGHT.otf')format('opentype');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-REGULAR.otf')format('opentype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-SEMIBOLD.otf')format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-BOLD.otf')format('opentype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'AFTIKASOFT';
+    src: url('./fonts/AFTIKASOFT-EXTRABOLD.otf')format('opentype');
+    font-weight: 600;
+}
+
+
+
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-black.otf') format('opentype');
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-bold.otf') format('opentype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-extrabold.otf') format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-extralight.otf') format('opentype');
+  font-weight: 200;
+  
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-light.otf') format('opentype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('./fonts/aftika-semibold.otf')format('opentype');
+  font-weight: 500;
+}
+/* A4 */
+@page {
+  size: A4;
+  margin: 3mm;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* =========================
+   ===== NAVBAR SUPERIOR
+========================= */
+
+.topbar{
+    width: 100%;
+    height: 60px;
+
+    background: #0089c4;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 99999;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+}
+
+/* botão voltar */
+.btn-voltar{
+    background: white;
+    color: #0089c4;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 8px 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-voltar:hover{
+    background: #f1f1f1;
+}
+
+/* menu dropdown */
+.menu-dropdown{
+    position: relative;
+}
+
+.btn-menu{
+    background: white;
+    color: #0089c4;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 8px 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* submenu */
+.submenu{
+    position: absolute;
+
+    top: 100%;
+    right: 0;
+
+    background: white;
+
+    width: 240px;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+
+    display: none;
+
+    margin-top: 2px;
+
+    z-index: 999999;
+}
+
+/* mostrar hover */
+.menu-dropdown:hover .submenu{
+    display: block;
+}
+
+.submenu a{
+    display: block;
+
+    padding: 14px 18px;
+
+    color: #333;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: .2s;
+}
+
+.submenu a:hover{
+    background: #f5f5f5;
+    color: #0089c4;
+}
+
+/* empurra conteúdo */
+body{
+    padding-top: 80px;
+}
+
+
+
+.menu{
+    background: white;
+    width: auto;
+    text-align: center;
+    align-items: center;
+    min-height: 350px;
+    border-radius: 3px;
+    margin-top: 80px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 999;
+    padding-bottom: 30px;
+}
+
+.bloco-titulo{
+    margin-top: 50px;
+    padding: 30px;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.text-titulo{
+    font-size: 40px;
+    font-family: 'AFTIKASOFT';
+    font-weight: 500;
+    padding: 50px;
+    color: #0da7d6;
+}
+
+.bloco-opmenu{
+    padding: 30px;
+}
+
+.btn-gerar{
+    background-color: #0da7d6; /* azul */
+    color: white;
+    border: none;
+    font-family: 'AFTIKASOFT';
+    font-weight: 100;
+}
+
+.btn-gerar:hover{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+}
+
+.btn-pdf{
+    background-color: #0da7d6; /* azul */
+    color: white;
+    border: none;
+}
+
+.btn-pdf:hover{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+}
+
+.btn-limpar{
+    background-color: #0da7d6; /* azul */
+    color: white;
+    border: none;
+}
+
+.btn-limpar:hover{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+}
+
+
+/* =========================
+   ===== BASE =====
+========================= */
+body{ background:#f5f6fa; }
+
+
+.btn-meu{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    font-family: 'Aftika',sans-serif;
+    font-weight: 300;
+}
+
+.btn-meu:hover{
+    background-color: #006fa1;
+    color:white;
+    margin-top: 10px;
+    font-family: 'Aftika',sans-serif;
+    font-weight: 300;
+}
+
+.btn-bntgerar{
+  background-color: #0089c4;
+  color: white;
+  width: 100%;
+  font-family: 'Aftika',sans-serif;
+  font-weight: 300;
+}
+
+.btn-bntgerar:hover{
+  background-color: #006fa1;
+  color: white;
+  width: 100%;
+  font-family: 'Aftika',sans-serif;
+  font-weight: 300;
+}
+
+/* Sem tamanho setado */
+.ean{
+  font-size: 11px;
+  margin-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: black;
+}
+
+
+/* tamanhos descrição */
+.desc-curta{ font-size: 20px; font-family: sans-serif;}
+.desc-media{ font-size: 20px; font-family: sans-serif;}
+.desc-longa{ font-size: 20px; font-family: sans-serif;}
+
+.validade{
+  font-size: 10px;
+  margin-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+/* PREÇO */
+.preco-original{
+  text-align: center;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+/* REAIS / CENTAVOS */
+.reais{
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.centavos{
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BLOCO PRETO */
+.bloco-promo{
+  background: black;
+  color: white;
+  padding: 10px;
+}
+
+/* TITULO */
+.titulo-promo{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+/* COMBINE */
+.combine{
+  background: white;
+  color: black;
+  padding: 6px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 3px;
+}
+
+/* GANHE */
+.ganhe{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.ganhe span{
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* PREÇO FINAL */
+.preco-final{
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* BOTÕES */
+.btn-meu{
+  background-color: #0089c4;
+  color: white;
+  border: none;
+  margin-top: 10px;
+}
+
+.btn-meu:hover{
+  background-color: #006fa1;
+  color:white;
+}
+.moeda, .percentual{
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+
+.linha{
+  border-bottom: 1px dotted #000;
+  margin: 30px 0;
+}
+
+.bloco-de{
+  margin-right: 200px;
+
+}
+
+.text-de{
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+.bloco-reais{
+  margin-top: -70px;
+  margin-bottom: 15px;
+  color: black;
+}
+
+.bloco-centavos{
+  margin-left: 105px;
+  margin-top:  -120px;
+  
+}
+
+.centavos{
+  font-size: 45px;
+  color: black;
+  margin-left:60px ;
+}
+
+.bloco-qtd{
+  margin-right: 140px;
+  margin-bottom: 50px;
+  margin-top: -10px;
+}
+
+.text-qtd{
+  font-size: 56px;
+}
+
+
+.bloco-produto{
+  margin-top: -9px;
+  margin-right: 30px;
+ 
+}
+
+
+
+.text-produto{
+  font-size: 13px;
+  font-weight: 100;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bloco-para{
+  margin-top: -8px;
+  margin-right: 58px;
+}
+
+.text-para{
+  font-size: 13px;
+  font-weight: 100;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  
+}
+
+.text-combine{
+  margin-right: 110px;
+}
+
+.bloco-ou{
+  margin-right: 35px;
+  margin-top: -120px;
+}
+
+.text-ou{
+  font-size: 13px;
+  font-weight: 100;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bloco-moeda{
+  margin-top: -12px;
+  margin-right: 400px;
+  color: black;
+}
+
+.bloco-gp{
+  background: black;
+  margin-left: 125px;
+  margin-top: -117px;
+  width: 80px;
+  border-radius: 6px;
+  height: 90px;
+}
+
+.bloco-cabelo{
+ margin-right: 85px;
+}
+
+.text-cabelo{
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-ganhe{
+  color: white
+}
+
+.p .moeda{
+    color: black;
+}
+
+.p .bloco-promo{
+  background: black;
+  color: white;
+  padding: 10px;
+  height: 250px;
+}
+
+/* tamanhos descrição */
+.p .desc-curta{ font-size: 20px; font-family: sans-serif; margin-top: -80px;line-height: 1.1; margin-bottom: 20px; color: black; font-weight: 600;}
+.p .desc-media{ font-size: 20px; font-family: sans-serif; margin-top: -80px;line-height: 1.1; margin-bottom: 20px; color: black; font-weight: 600;}
+.p .desc-longa{ font-size: 20px; font-family: sans-serif;margin-top: -80px;line-height: 1.1;margin-bottom: 20px; color: black; font-weight: 600;}
+
+/* ===== PREÇO NORMAL (DE) ===== */
+.preco-normal-pequeno { font-size: 70px !important; color: black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-right: 120px;}
+.preco-normal-medio   { font-size: 70px !important; color:black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-right: 120px;letter-spacing: -1px;}
+.preco-normal-grande  { font-size: 67px !important; color:black; font-family: Arial, Helvetica, sans-serif;font-weight: bold;margin-right: 120px;}
+
+/* ===== PREÇO PROMO (POR) ===== */
+.preco-final-pequeno { font-size: 70px !important; color:red; font-family: Arial, Helvetica, sans-serif; font-weight: bold;}
+.preco-final-medio   { font-size: 70px !important; color:red; font-family: Arial, Helvetica, sans-serif; font-weight: bold;}
+.preco-final-grande  { font-size: 70px !important; color: red;font-family: Arial, Helvetica, sans-serif; font-weight: bold;}
+
+.bloco-percentual{
+  margin-left: 13px;
+  margin-top: -10px;
+}
+
+.percentual{
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.bloco-desc{
+  margin-left: 13px;
+}
+
+.text-desc{
+  font-size: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+.bloco-por{
+  margin-top: 30px;
+  margin-right: 305px;
+}
+
+.text-por{
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+/* =========================
+   ===== Etiqueta TAMANHO P (SEU ORIGINAL)
+========================= */
+
+
+
+.p .folha{
+    width:21cm;
+    min-height:29.7cm;
+    display:flex;
+    flex-wrap:wrap;
+    background:white;
+    margin:40px auto 0 auto;
+    gap:24px;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+/* =========================
+   ===== Etiqueta TAMANHO P (SEU ORIGINAL)
+========================= */
+.p .etiqueta{
+  width: 64mm;
+  height: 145mm;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ===== LOGO ===== */
+
+
+.p .linha{
+  border-bottom: 1px dotted #000;
+  margin:20px 0;
+  margin-bottom: 40px;
+}
+
+.p .bloco-pfcentavos{
+  margin-left: 160px;
+  margin-top: -87px;
+  margin-bottom: 30px;
+
+}
+
+.p .pfcentavos{
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+}
+
+
+/* ===== PREÇO NORMAL (DE) ===== */
+.p .preco-normal-pequeno { font-size: 80px !important; color: black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-left: 123px;}
+.p .preco-normal-medio   { font-size: 80px !important; color:black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-left: 77px;}
+.p .preco-normal-grande  { font-size: 80px !important; color:black; font-family: Arial, Helvetica, sans-serif;font-weight: bold;margin-left: 32px;}
+
+/* ===== PREÇO PROMO (POR) ===== */
+.p .preco-final-pequeno { font-size: 65px !important; color:white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-left: 145px; margin-top: -60px;}
+.p .preco-final-medio   { font-size: 65px !important; color:white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-left: 5px;margin-top: -60px;}
+.p .preco-final-grande  { font-size: 65px !important; color: white;font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-right: 77px;margin-top: -60px;}
+
+.p .bloco-pfreais{
+    margin-top: -70px;
+    margin-left: 35px;
+}
+
+.p .bloco-pfcada{
+  margin-left: 165px;
+  margin-top: -40px;
+}
+
+.p .text-pfcada{
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.p .bloco-pfmoeda{
+  margin-right: 550px;
+  color: white;
+  margin-top: -8px;
+
+}
+
+.p .pfmoeda{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.p .bloco-sinalp{
+  margin-left: 60px;
+  margin-top: -40px;
+}
+
+.p .text-sinalp{
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.text-sinalp{
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.p .bloco-desc{
+  margin-right: 50px;
+  margin-top: -5px;
+}
+
+.p .text-desc{
+  font-size: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+.p .bloco-desco{
+    margin-top: -24px;
+    margin-left: 28px;
+}
+
+.p .text-desco{
+  font-size: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  color: white;
+  margin-top: -30px;
+}
+
+.p .bloco-cada{
+    margin-left: 170px;
+    color: black;
+    font-size: 13px;
+    margin-top: -15px;
+}
+.p .bloco{
+  margin-right: 125px;
+}
+
+
+.p .bloco-por{
+  margin-top: 30px;
+  margin-right: 570px;
+}
+
+.p .text-por{
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.text-pfreais{
+    color: red;
+}
+
+
+/* =========================
+   ===== TAMANHO M (SEU ORIGINAL)
+========================= */
+
+.m .etiqueta{
+    width: 9.8cm;
+    height: 14cm;
+    border: 1px solid #000;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-inside: avoid;
+
+    position: relative; /* ADICIONE */
+}
+
+.m .folha{
+    width:21cm;
+    min-height:29.7cm;
+    display:flex;
+    flex-wrap:wrap;
+    background:white;
+    margin:40px auto 0 auto;
+    gap:24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== LOGO ===== */
+
+
+.m .linha{
+  border-bottom: 1px dotted #000;
+  margin:20px 0;
+  margin-bottom: 10px;
+}
+
+.m .ean{
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: black;
+}
+
+.m .validade{
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: black;
+}
+
+.m .bloco-qtd{
+    margin-left: -120px;
+}
+
+.m .bloco-pfcentavos{
+  margin-left: 100px;
+  margin-top: -87px;
+  margin-bottom: 30px;
+
+}
+
+.m .pfcentavos{
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+}
+
+.m .bloco-centavos{
+    margin-right: 20px;
+}
+
+/* tamanhos descrição */
+.m .desc-curta{ font-size: 23px; font-family: sans-serif; margin-top: -40px;line-height: 1.1; margin-bottom: 25px; color: black; font-weight: 600;}
+.m .desc-media{ font-size: 23px; font-family: sans-serif; margin-top: -40px;line-height: 1.1; margin-bottom: 25px; color: black; font-weight: 600;}
+.m .desc-longa{ font-size: 23px; font-family: sans-serif;margin-top: -50px;line-height: 1.1;margin-bottom: 25px; color: black; font-weight: 600;}
+
+
+/* ===== PREÇO NORMAL (DE) ===== */
+.m .preco-normal-pequeno { font-size: 80px !important; color: black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-left: 123px;}
+.m .preco-normal-medio   { font-size: 80px !important; color:black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-left: 100px;}
+.m .preco-normal-grande  { font-size: 80px !important; color:black; font-family: Arial, Helvetica, sans-serif;font-weight: bold;margin-left: 32px;}
+
+/* ===== PREÇO PROMO (POR) ===== */
+.m .preco-final-pequeno { font-size: 65px !important; color:white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-left: 145px; margin-top: -60px;}
+.m .preco-final-medio   { font-size: 65px !important; color:white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-right: 120px;margin-top: -60px;}
+.m .preco-final-grande  { font-size: 65px !important; color: white;font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-right: 77px;margin-top: -60px;}
+
+.m .bloco-pfreais{
+    margin-top: -70px;
+    margin-left: 35px;
+}
+
+.m .bloco-gp{
+    margin-left: 260px;
+}
+
+.m .bloco-produto{
+    margin-right: 160px;
+    margin-top: -10px;
+    
+}
+
+.m .bloco-para{
+    margin-right: 190px;
+}
+
+.m .text-para{
+    color: black;
+    font-weight: bold;
+}
+
+.m .bloco-cabelo{
+    margin-right: 200px;
+}
+
+.m .bloco-ou{
+  margin-right: 170px;
+  font-weight: bold;
+  margin-top: -120px;
+  color: black;
+}
+
+.m .text-ou{
+    font-weight: bold;
+}
+
+.m .text-produto{
+    font-weight: bold;
+    color: black;
+}
+
+.m .bloco-pfcada{
+  margin-left: 165px;
+  margin-top: -40px;
+}
+
+.m .text-pfcada{
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.m .bloco-pfmoeda{
+  margin-right: 550px;
+  color: white;
+  margin-top: -8px;
+
+}
+
+.m .pfmoeda{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.m .bloco-sinalp{
+  margin-left: 60px;
+  margin-top: -40px;
+}
+
+.m .text-sinalp{
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.m .text-sinalp{
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.m .bloco-desc{
+  margin-right: 50px;
+  margin-top: -5px;
+}
+
+.m .text-desc{
+  font-size: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+.m .bloco-de{
+    margin-right: 330px;
+    margin-bottom: 5px;
+}
+
+.m .bloco-desco{
+    margin-top: -24px;
+    margin-left: 28px;
+}
+
+.m .text-desco{
+  font-size: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  color: white;
+  margin-top: -30px;
+}
+
+.m .bloco-cada{
+    margin-left: 170px;
+    color: black;
+    font-size: 13px;
+    margin-top: -15px;
+}
+.m .bloco{
+  margin-right: 125px;
+}
+
+
+.m .bloco-por{
+  margin-top: 30px;
+  margin-right: 570px;
+}
+
+.m .text-por{
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.m .text-pfreais{
+    color: white;
+}
+
+
+
+
+/* =========================
+   ===== TAMANHO G (SEU ORIGINAL)
+========================= */
+
+.g .etiqueta{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-inside: avoid;
+
+    position: relative; /* ADICIONE ISSO */
+}
+
+.g .folha{
+    width: 20.7cm;
+    height: 29.2cm; /*  fixa altura */
+    margin: 0 auto;
+    background: white;
+    box-sizing: border-box;
+    padding:5mm; /*  margem de segurança */
+    page-break-after: always;
+}
+
+/* ===== LOGO ===== */
+
+
+.g .linha{
+  border-bottom: 1px dotted #000;
+  margin: 60px 0;
+}
+
+.g .bloco-pfcentavos{
+  margin-left: 415px;
+  margin-top: -285px;
+  margin-bottom: 30px;
+
+}
+
+.g .pfcentavos{
+  font-size: 80px;
+  font-weight: bold;
+}
+
+
+/* ===== PREÇO NORMAL (DE) ===== */
+.g .preco-normal-pequeno { font-size: 200px !important; color: black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-left: 245px;}
+.g .preco-normal-medio   { font-size: 200px !important; color:black; font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-left: 180px;}
+.g .preco-normal-grande  { font-size: 200px !important; color:black; font-family: Arial, Helvetica, sans-serif;font-weight: bold;margin-left: 77px;}
+
+/* ===== PREÇO PROMO (POR) ===== */
+.g .preco-final-pequeno { font-size: 200px !important; color:white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-left: 145px;}
+.g .preco-final-medio   { font-size: 200px !important; color:white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;margin-left: 5px;}
+.g .preco-final-grande  { font-size: 200px !important; color: white;font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-right: 77px;}
+
+.g .bloco-pfcada{
+  margin-left: 410px;
+  margin-top: -45px;
+}
+
+.g .text-pfcada{
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.g .bloco-pfmoeda{
+  margin-right: 550px;
+  color: white;
+  margin-top: -8px;
+
+}
+
+.g .pfmoeda{
+  font-size: 34px;
+}
+
+.g .bloco-sinalp{
+  margin-left: 160px;
+  margin-top: -90px;
+}
+
+.g .text-sinalp{
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 35px;
+}
+
+.text-sinalp{
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.g .bloco-desc{
+  margin-left: 45px;
+  margin-top: 10px;
+}
+
+.g .text-desc{
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+
+
+.g .bloco{
+  margin-right: 125px;
+}
+
+
+.g .bloco-por{
+  margin-top: 30px;
+  margin-right: 570px;
+}
+
+.g .text-por{
+  font-family: Arial, sans-serif;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+
+/* =========================
+   ===== BOTÃO TOPO
+========================= */
+
+.btn-topo{
+
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #0089c4;
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: none;
+
+    z-index: 999999;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.25);
+
+    transition: .3s;
+}
+
+.btn-topo:hover{
+
+    transform: translateY(-3px);
+
+    background: #006fa1;
+}
+
+
+/*----- Parte Nova */
+@media print {
+
+  /* remove fundo geral */
+  body{
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* esconde tudo */
+  body *{
+    visibility: hidden;
+  }
+
+  /* mostra somente etiquetas */
+  #areaEtiquetas,
+  #areaEtiquetas *{
+    visibility: visible;
+  }
+
+  /* área das etiquetas ocupa página toda */
+  #areaEtiquetas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* remove sombras e fundos */
+  .folha{
+    margin: 0 auto !important;
+    background: white !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  /* evita quebrar etiqueta */
+  .etiqueta{
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+}
+
+
+
+.g .texto-unitario{
+    margin-top:90px;
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+}
+
+</style>
+
+</head>
+<body>
+<!-- NAVBAR -->
+<div class="topbar no-print">
+
+    <!-- VOLTAR -->
+    <button class="btn-voltar" onclick="voltar()">
+        ← Voltar
+    </button>
+
+    <!-- MENU -->
+    <div class="menu-dropdown">
+
+        <button class="btn-menu" onclick="toggleMenu()">
+            ☰ Menu
+        </button>
+
+        <div class="submenu" id="submenu">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="de-por.html">
+                Etiquetas De | Por
+            </a>
+
+            <a href="leve-mais.html">
+                Etiquetas Leve Mais
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="menu">
+
+          <div class="bloco-titulo">
+            <span class="text-titulo">
+                Gerador de Etiquetas Combine e Ganhe
+            </span>
+        </div>
+
+          <div class="bloco-opmenu">
+
+            <!-- LINHA DOS INPUTS -->
+ <div class="row justify-content-center">
+
+    <!-- PLANILHA -->
+    <div class="col-md-5">
+        <input type="file"
+               id="input-excel"
+               class="form-control">
+    </div>
+
+    <!-- TAMANHO -->
+    <div class="col-md-3">
+        <select id="tamanho" class="form-control">
+            <option value="">Selecione</option>
+            <option value="p">P</option>
+        </select>
+    </div>
+
+</div>
+
+            <!-- LINHA DOS BOTÕES -->
+            <div class="row mt-3">
+
+                <div class="col-md-4">
+                    <button onclick="gerar()"
+                            class="btn btn-gerar btn-block">
+                        Gerar
+                    </button>
+                </div>
+
+                <div class="col-md-4">
+                    <button onclick="gerarPDF()"
+                            class="btn btn-pdf btn-block">
+                        PDF
+                    </button>
+                </div>
+
+                <div class="col-md-4">
+                    <button onclick="limpar()"
+                            class="btn btn-limpar btn-block">
+                        Limpar
+                    </button>
+                </div>
+
+           
+</div>
+</div>
+</div>
+
+<!-- =========================
+ÁREA ETIQUETAS
+========================= -->
+
+<div id="areaEtiquetas"></div>
+
+<script>
+
+/* =========================
+DADOS
+========================= */
+
+let dadosPlanilha = [];
+
+/* =========================
+LER PLANILHA
+========================= */
+
+document.getElementById('input-excel')
+        .addEventListener('change', lerPlanilha);
+
+function lerPlanilha(e){
+
+    const reader = new FileReader();
+
+    reader.onload = evt => {
+
+        const workbook = XLSX.read(
+            new Uint8Array(evt.target.result),
+            {type:'array'}
+        );
+
+        const sheet = workbook.Sheets[
+            workbook.SheetNames[0]
+        ];
+
+        dadosPlanilha = XLSX.utils.sheet_to_json(sheet);
+
+        console.log(dadosPlanilha);
+
+    };
+
+    reader.readAsArrayBuffer(e.target.files[0]);
+
+}
+
+/* =========================
+FORMATAR DATA
+========================= */
+
+function formatarDataExcel(valor){
+
+    if(typeof valor === "number"){
+
+        let d = XLSX.SSF.parse_date_code(valor);
+
+        return `${String(d.d).padStart(2,'0')}/${String(d.m).padStart(2,'0')}/${String(d.y).slice(-2)}`;
+    }
+
+    return valor || "";
+}
+
+/* =========================
+SEPARAR PREÇO
+========================= */
+
+function separarPreco(valor){
+
+    if(!valor){
+
+        return {
+            reais:"0",
+            centavos:"00"
+        };
+    }
+
+    let numero = valor.toString().replace(",", ".");
+
+    let formatado = parseFloat(numero).toFixed(2);
+
+    let partes = formatado.split(".");
+
+    return {
+
+        reais: partes[0],
+        centavos: partes[1]
+
+    };
+
+}
+
+/* =========================
+CLASSE PREÇO
+========================= */
+
+function classificarPreco(reais, tipo){
+
+    reais = String(reais || "0");
+
+    if(reais.length <= 1){
+
+        return `${tipo}-pequeno`;
+
+    }else if(reais.length === 2){
+
+        return `${tipo}-medio`;
+
+    }else{
+
+        return `${tipo}-grande`;
+    }
+
+}
+
+/* =========================
+DESCRIÇÃO
+========================= */
+
+function analisarDescricao(texto){
+
+    if(!texto) return "desc-curta";
+
+    let tamanho = texto.length;
+
+    if(tamanho <= 25){
+
+        return "desc-curta";
+
+    }else if(tamanho <= 40){
+
+        return "desc-media";
+
+    }else{
+
+        return "desc-longa";
+    }
+
+}
+
+/* =========================
+ESTRUTURA BASE
+========================= */
+
+function criarEstruturaEtiqueta(item,tamanho){
+
+    let precoNormal = separarPreco(item.valor);
+
+    let precoFinal = separarPreco(item.preco);
+
+    let classeDescricao = analisarDescricao(item.descricao);
+
+    return `
+
+    <div class="etiqueta ${tamanho}">
+
+        <div class="linha"></div>
+
+        <div class="topo">
+
+            <div class="descricao ${classeDescricao}">
+                ${item.descricao || ""}
+            </div>
+
+            <div class="ean">
+                EAN: ${item.ean || ""}
+            </div>
+
+            <div class="validade">
+                *Oferta válida de
+                ${formatarDataExcel(item.data_inicio)}
+                até
+                ${formatarDataExcel(item.data_fim)}
+            </div>
+
+            <div class="preco-original">
+
+                <div class="bloco-de">
+                    <span class="text-de">DE</span>
+                </div>
+
+                <div class="bloco-moeda">
+                    <span class="moeda">R$:</span>
+                </div>
+
+                <div class="bloco-reais">
+
+                    <span class="reais ${classificarPreco(precoNormal.reais,'preco-normal')}">
+                        ${precoNormal.reais}
+                    </span>
+
+                </div>
+
+                <div class="bloco-centavos">
+
+                    <span class="centavos">
+                        ,${precoNormal.centavos}
+                    </span>
+
+                </div>
+             <div class="bloco-cada">
+
+                    <span class="text-cada">
+                        CADA
+                    </span>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bloco-promo">
+
+            <div class="titulo-promo">
+                COMBINE E GANHE
+            </div>
+
+            <div class="combine">
+
+                <div class="bloco">
+                    <span class="text-combine">
+                        Combine
+                    </span>
+                </div>
+
+                <div class="bloco-qtd">
+
+                    <span class="text-qtd">
+                        ${item.quantidade || 0}
+                    </span>
+
+                </div>
+
+                <div class="bloco-ou">
+
+                    <span class="text-ou">
+                        ou mais
+                    </span>
+
+                </div>
+
+                <div class="bloco-produto">
+
+                    <span class="text-produto">
+                        produtos
+                    </span>
+
+                </div>
+
+                <div class="bloco-para">
+
+                    <span class="text-para" style="color: white;">
+    para
+</span>
+
+                </div>
+
+                <div class="bloco-cabelo">
+
+                    <span class="text-cabelo">
+                        ${item.categoria || ""}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="bloco-gp">
+
+                <div class="ganhe">
+
+                    <span class="text-ganhe">
+                        Ganhe
+                    </span>
+
+                </div>
+
+                <div class="bloco-percentual">
+
+                    <span class="percentual">
+                        ${item.porcentagem || 0}
+                    </span>
+
+                </div>
+
+                <div class="bloco-sinalp">
+
+                    <span class="text-sinalp">
+                        %
+                    </span>
+
+                </div>
+
+                <div class="bloco-desc">
+
+                    <span class="text-desc">DE</span>
+       
+
+                </div>
+
+                <div class="bloco-desco">
+
+                    <span class="text-desco">DESCONTO</span>
+
+                </div>
+
+            </div>
+
+            <div class="preco-final">
+
+                <div class="bloco-por">
+
+                    <span class="text-por">
+                        POR
+                    </span>
+
+                </div>
+
+                <div class="bloco-pfmoeda">
+
+                    <span class="pfmoeda">
+                        R$:
+                    </span>
+
+                </div>
+
+                <div class="bloco-pfreais">
+
+                    <span class="text-pfreais ${classificarPreco(precoFinal.reais,'preco-final')}">
+                        ${precoFinal.reais}
+                    </span>
+
+                </div>
+
+                <div class="bloco-pfcentavos">
+
+                    <span class="pfcentavos">
+                        ,${precoFinal.centavos}
+                    </span>
+
+                </div>
+
+                <div class="bloco-pfcada">
+                  <span class="text-pfcada">CADA</span>
+                  </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+/* =========================
+ETIQUETA P
+========================= */
+
+function criarEtiquetaP(item){
+
+    return criarEstruturaEtiqueta(item,"p");
+
+}
+
+/* =========================
+ETIQUETA M
+========================= */
+
+function criarEtiquetaM(item){
+
+    return criarEstruturaEtiqueta(item,"m");
+
+}
+
+/* =========================
+ETIQUETA G
+========================= */
+
+function criarEtiquetaG(item){
+
+    return criarEstruturaEtiqueta(item,"g");
+
+}
+
+/* =========================
+GERAR
+========================= */
+
+function gerar(){
+
+    const tipo = document.getElementById("tamanho").value;
+
+    const area = document.getElementById("areaEtiquetas");
+
+    if(!tipo){
+
+        alert("Selecione um tamanho");
+
+        return;
+    }
+
+    if(dadosPlanilha.length === 0){
+
+        alert("Importe uma planilha");
+
+        return;
+    }
+
+    area.className = tipo;
+
+    area.innerHTML = "";
+
+    let etiquetasPorFolha = 1;
+
+    if(tipo === "p"){
+
+        etiquetasPorFolha = 6;
+
+    }else if(tipo === "m"){
+
+        etiquetasPorFolha = 4;
+
+    }else if(tipo === "g"){
+
+        etiquetasPorFolha = 1;
+    }
+
+    let contador = 0;
+
+    let html = `<div class="folha">`;
+
+    dadosPlanilha.forEach((item,index)=>{
+
+        if(tipo === "p"){
+
+            html += criarEtiquetaP(item);
+
+        }else if(tipo === "m"){
+
+            html += criarEtiquetaM(item);
+
+        }else{
+
+            html += criarEtiquetaG(item);
+        }
+
+        contador++;
+
+        if(
+            contador === etiquetasPorFolha
+            &&
+            index !== dadosPlanilha.length - 1
+        ){
+
+            html += `</div><div class="folha">`;
+
+            contador = 0;
+        }
+
+    });
+
+    html += `</div>`;
+
+    area.innerHTML = html;
+
+}
+
+/* =========================
+LIMPAR
+========================= */
+
+function limpar(){
+
+    document.getElementById("areaEtiquetas").innerHTML = "";
+
+    document.getElementById("input-excel").value = "";
+
+    document.getElementById("tamanho").value = "";
+
+    dadosPlanilha = [];
+
+}
+
+/* =========================
+PDF
+========================= */
+
+async function gerarPDF(){
+
+    const file = await window.api.gerarPDF();
+
+    alert("PDF gerado com sucesso!");
+
+}
+
+/* =========================
+VOLTAR
+========================= */
+
+function voltar(){
+
+    window.history.back();
+
+}
+
+/* =========================
+MENU
+========================= */
+
+function toggleMenu(){
+
+    const menu = document.getElementById("submenu");
+
+    if(menu.style.display === "block"){
+
+        menu.style.display = "none";
+
+    }else{
+
+        menu.style.display = "block";
+    }
+
+}
+
+/* =========================
+FECHAR MENU
+========================= */
+
+document.addEventListener("click", function(event){
+
+    const menu = document.getElementById("submenu");
+
+    const botao = document.querySelector(".btn-menu");
+
+    if(
+        !menu.contains(event.target)
+        &&
+        !botao.contains(event.target)
+    ){
+
+        menu.style.display = "none";
+    }
+
+});
+
+/* =========================
+BOTÃO TOPO
+========================= */
+
+window.addEventListener("scroll", function(){
+
+    const botao = document.getElementById("btnTopo");
+
+    if(window.scrollY > 300){
+
+        botao.style.display = "block";
+
+    }else{
+
+        botao.style.display = "none";
+    }
+
+});
+
+function voltarTopo(){
+
+    window.scrollTo({
+
+        top: 0,
+        behavior: "smooth"
+
+    });
+
+}
+
+
+</script>
+<!-- BOTÃO VOLTAR TOPO -->
+<button class="btn-topo no-print" id="btnTopo" onclick="voltarTopo()">
+    ↑
+</button>
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Gerador de Etiquetas</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- SheetJS -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- html2pdf -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-black.otf') format('truetype');
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-bold.otf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-extrabold.otf') format('truetype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-extralight.otf') format('truetype');
+  font-weight: 200;
+  
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-light.otf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-regular.otf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-semibold.otf')format('truetype');
+  font-weight: 500;
+}
+
+/* A4 */
+@page {
+  size: A4;
+  margin: 0;
+
+}
+
+body {
+    background: #f5f6fa;
+}
+
+/* FOLHA */
+.folha {
+    width: 20.7cm;
+    height: 29.2cm; /*  fixa altura */
+    margin: 0 auto;
+    background: white;
+    box-sizing: border-box;
+    padding:5mm; /* margem de segurança */
+    page-break-after: always;
+}
+.etiqueta:first-child {
+    margin-top: 0 !important;
+}
+
+/* ETIQUETA */
+.etiqueta {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+/** ---- LINHA PONTILHADA ---- **/
+
+.linha-pontilhada{
+  border-bottom: 1px dotted #000;
+  margin: 30px 0;
+}
+
+/** ---- LOGO ---- **/
+
+.logo{
+    width: 40%;
+    height: auto;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    margin-left: 228px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+
+/* TEXTOS */
+.descricao {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    margin-top: -30px;
+    margin-bottom: 60px;
+}
+
+/** ---- EAN ---- **/
+.ean{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 27px;
+    margin-top: -20px;
+}
+
+/** ---- DATA DE VALIDADE ---- **/
+
+.periodo{
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 27px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+/* PREÇO ANTIGO */
+.valor-antigo {
+    text-align: center;
+   margin-top: 70px;
+}
+
+/* PREÇO NOVO */
+.preco {
+    text-align: center;
+    font-weight: bold;
+    background: black;
+    height: 620px;
+    margin-top: -40px;
+    margin-left: 8px;
+    margin-right: 8px;
+   
+}
+
+/* PARTES DO PREÇO */
+/*---------------------------------------*/
+
+/** ---- INÍCIO DE "DE" ---- **/
+.bloco-de{
+    margin-top: -60px;
+    margin-right: 620px;
+}
+
+.text-de{
+    font-size: 35px;
+    color: black;
+    font-weight: bold;
+}
+
+/** ---- FIM DE "DE" ---- **/
+/*---------------------------------------*/
+
+/** ---- MOEDA ---- **/
+.bloco-rs{
+ margin-right: 609px;
+ margin-top: -15px;
+ color: black;
+}
+
+.text-rs{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/** ---- FIM DA MOEDA ---- **/
+
+/*---------------------------------------*/
+
+/** ---- INÍCIO DE R$ ---- **/
+.bloco-reais{
+   margin-top: -210px;
+
+}
+
+.text-reais{
+    font-size: 300px;
+    font-weight: bold;
+    color: black;
+}
+
+/** ---- FIM REAIS ---- **/
+/*---------------------------------------*/
+
+/** ---- INÍCIO DE CENTAVOS ---- **/
+.bloco-centavos{
+  margin-left: 350px; 
+  margin-top: -370px;
+  margin-bottom: 150px;
+}
+
+.text-centavos{
+  font-size: 140px;
+  font-weight: bold;
+  color: black;
+}
+
+/** ---- FIM CENTAVOS ---- **/
+/**------------------------------------**/
+
+/** ---- COMPRE PREÇO NOVO ---- **/
+
+.bloco-compre{
+    margin-right: 350px;
+    margin-top: -12px;
+}
+
+.text-compre{
+  color: white;
+  font-size: 40px;
+}
+/** ---- FIM DO COMPRE NOVO ---- **/
+/**-----------------------------------**/
+
+/** ---- UNIDADE DO NOVO ---- **/
+/**------------------------------------**/
+
+.bloco-uni{
+    margin-top: -96px;
+    margin-left: 320px;
+    padding: 10px;
+}
+.text-uni{
+  color: white;
+  font-size: 40px;
+
+}
+/** ---- FIM DO UNIDADE ---- **/
+
+
+/* PARTES DO PREÇO Novo*/
+.rs-preco {
+    font-size: 14px;
+    vertical-align: top;
+    color: white;
+}
+
+.reais-preco {
+    font-size: 400px;
+    color: white;
+}
+
+.centavos-preco {
+    font-size: 18px;
+    position: relative;
+    top: -10px;
+    color: white;
+}
+
+
+.bloco-unidade{
+    margin-top: -74px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+}
+
+.text-unidade{
+  color: white;
+  font-size: 58px;
+}
+
+
+/** ---- POR DO PREÇO PROMO ---- **/
+/*--------------------------------------------*/
+
+.bloco-por{
+  margin-right: 670px;
+  font-size: 35px;
+}
+
+.text-por{
+  color: white;
+  font-size: 35px;
+}
+
+/** ---- FIM DO POR PROMO ---- **/
+/**----------------------------------------**/
+
+/* ---- MOEDA DO PREÇO PROMO ---- */
+/** ---------------------------------------**/
+
+.bloco-rspreco{
+  margin-right: 648px;
+  margin-top: -5px;
+  
+}
+
+.rs-precopromo{
+    color: white;
+    font-size: 35px;
+}
+
+/** ---- FIM DO MOEDA PROMO ---- **/
+/*--------------------------------------------*/
+
+
+.bloco-reaispreco{
+margin-top: -230px;
+}
+
+
+
+
+
+
+
+.reais-preco{
+  font-size: 300px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.bloco-centavospreco{
+  margin-left: 380px;
+  margin-top: -360px;
+}
+
+.centavos-preco{
+  font-size: 140px;
+}
+
+
+
+.bloco-campo{
+  border: 1px solid black;
+  width: 600px;
+  align-items: center;
+  text-align: center;
+  margin-left: 75px;
+  border-radius: 5px;
+  padding: 8px;
+  height: 60px;
+  margin-top: 5px;
+}
+
+.bloco-texto{
+    margin-top: 3px;
+    margin-bottom: 30px;
+}
+
+.text-texto{
+    color: white;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.bloco-precopromo{
+    padding: 23px;
+    margin-top:  -30px;
+}
+
+
+
+
+
+
+
+
+
+/** ---- BOTÕES DA PÁGINA ---- **/
+
+.btn-bntgerar{
+  background-color: #0089c4;
+  color: white;
+  width: 100%;
+  font-family: 'Aftika',sans-serif;
+  font-weight: 200;
+}
+
+.btn-bntgerar:hover{
+  background-color: #006fa1;
+  color: white;
+  width: 100%;
+  font-family: 'Aftika',sans-serif;
+  font-weight: 200;
+}
+
+.btn-meu{
+    background-color: #0089c4;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    font-family: 'Aftika',sans-serif;
+    font-weight: 200;
+}
+
+.btn-meu:hover{
+    background-color: #006fa1;
+    color:white;
+    margin-top: 10px;
+    font-family: 'Aftika',sans-serif;
+    font-weight: 200;
+}
+
+.bloco-titulo{
+  color: #0089c4;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Aftika',sans-serif;
+  margin-bottom: 50px;
+}
+
+
+</style>
+</head>
+
+<body>
+ 
+<button onclick="window.location.href='index.html'" class="btn btn-meu no-print">
+   ← Voltar
+</button>
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-body">
+
+            <h4 class="bloco-titulo">Gerador de Etiquetas</h4>
+
+            <div class="form-row align-items-center">
+                <div class="col-md-6 mb-2">
+                    <input type="file" id="input-excel" class="form-control-file">
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <button onclick="gerarPDF()" class="btn btn-primary btn-block">
+                        Gerar PDF
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="area-pdf" class="mt-4"></div>
+
+<script>
+
+/* =========================
+   LER EXCEL
+========================= */
+document.getElementById('input-excel').addEventListener('change', lerExcel);
+
+function lerExcel(e){
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(sheet);
+
+        gerarEtiquetas(json);
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+/* =========================
+   GERAR ETIQUETAS
+========================= */
+function gerarEtiquetas(dados){
+    const area = document.getElementById('area-pdf');
+    area.innerHTML = '';
+
+    dados.forEach(item => {
+        area.innerHTML += `
+            <div class="folha">
+                ${criarEtiqueta(item)}
+            </div>
+        `;
+    });
+}
+
+/* =========================
+   SEPARAR PREÇO
+========================= */
+function separarPreco(valor){
+    if(!valor) return { reais: "0", centavos: "00" };
+
+    if(typeof valor === "string"){
+        valor = valor.replace(',', '.');
+    }
+
+    let numero = Number(valor).toFixed(2);
+    let partes = numero.split('.');
+
+    return {
+        reais: partes[0],
+        centavos: partes[1]
+    };
+}
+
+/* =========================
+   FORMATAR DATA
+========================= */
+function formatarData(data){
+    if(!data) return '';
+
+    if(typeof data === "number"){
+        const d = new Date((data - 25569) * 86400 * 1000);
+        return d.toLocaleDateString('pt-BR');
+    }
+
+    const d = new Date(data);
+    return d.toLocaleDateString('pt-BR');
+}
+
+/* =========================
+   CRIAR ETIQUETA
+========================= */
+function criarEtiqueta(item){
+
+    const precoDe = separarPreco(item.valor);
+    const precoPor = separarPreco(item.preco_final);
+
+    return `
+        <div class="etiqueta">
+            <div class="linha-pontilhada"></div>
+            <img src="img/super-oferta.png" class="logo">
+
+            <div class="descricao">
+                ${item.descricao || ''}
+            </div>
+
+            <div class="ean">
+                EAN: ${item.ean || ''}
+            </div>
+
+            <div class="periodo">
+                Ofertas válidas de ${formatarData(item.data_inicio)} até ${formatarData(item.data_fechamento)}
+            </div>
+
+            <!-- PREÇO ANTIGO -->
+            <div class="valor-antigo">
+
+                <div class="bloco-de">
+                <span class="text-de">DE</span>
+                </div>
+                
+                <div class="bloco-rs">
+                <span class="text-rs">R$:</span>
+                </div>
+
+                <div class="bloco-reais">
+                <span class="text-reais">${precoDe.reais}</span>
+                </div>
+                
+                <div class="bloco-centavos">
+                <span class="text-centavos">,${precoDe.centavos}</span>
+                </div>
+
+            </div>
+
+            <!-- PREÇO NOVO -->
+            <div class="preco">
+
+               <div class="bloco-campo">
+
+            
+                
+                 
+                  
+                   
+                      </div>
+
+                     
+                    
+                        <div class="bloco-precopromo">
+                      <div class="bloco-por">
+                        <span class="text-por">Por</span>
+                        </div>
+                  
+                        <div class="bloco-rspreco">
+                        <span class="rs-precopromo">R$:</span>
+                        </div>
+                        
+                        <div class="bloco-reaispreco">
+                        <span class="reais-preco">${precoPor.reais}</span>
+                        </div>
+
+                        <div class="bloco-centavospreco">
+                        <span class="centavos-preco">,${precoPor.centavos}</span>
+                        </div>
+                        </div>
+            </div>
+
+        </div>
+    `;
+}
+
+/* =========================
+   GERAR PDF
+========================= */
+function gerarPDF(){
+    const element = document.getElementById('area-pdf');
+
+    html2pdf().set({
+        margin: 0,
+        filename: 'etiquetas.pdf',
+        image: { type: 'jpeg', quality: 1 },
+
+        html2canvas: {
+            scale: 1,        //  ESSENCIAL (era 2)
+            useCORS: true
+        },
+
+        jsPDF: {
+            unit: 'cm',
+            format: 'a4',
+            orientation: 'portrait'
+        }
+    }).from(element).save();
+}
+</script>
+
+</body>
+</html>

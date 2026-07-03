@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Gerador de Etiquetas</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<style>
+@font-face {
+  font-family: 'Aftika';
+  src: url('fonts/aftika-bold.otf') format('truetype');
+  font-weight: 700;
+}
+
+/* FUNDO */
+body{
+    background: linear-gradient(135deg, #0da7d6, #00c6ff);
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header{
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+.header h1{
+    font-family: 'Aftika',sans-serif;
+}
+
+/* CARDS */
+.card-modelo{
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card-modelo:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* IMAGEM */
+.img-card{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+/* BOTÃO */
+.btn-abrir{
+    border-radius: 20px;
+}
+
+/* LOGO */
+.bloco-logo{
+    text-align: center;
+}
+
+.bloco-logo img{
+    width: 8%;
+    margin-top: 200px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Gerador de Etiquetas</h1>
+        <p>Escolha o modelo de etiqueta que deseja criar</p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="row mt-5">
+
+        <!-- DE | POR -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-modelo" onclick="clicarCard(this, 'de-por.html')">
+                <img 
+                    src="img/etiquetadepor.jpg"
+                    data-hover="img/etiquetadepor-hover.jpg"
+                    data-click="img/etiquetadepor-click.jpg"
+                    class="img-card"
+                >
+                <div class="card-body text-center">
+                    <button class="btn btn-primary btn-abrir">Abrir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEVE MAIS -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-modelo" onclick="clicarCard(this, 'leve-mais.html')">
+                <img 
+                    src="img/leve-mais.jpg"
+                    data-hover="img/leve-mais-hover.jpg"
+                    data-click="img/leve-mais-click.jpg"
+                    class="img-card"
+                >
+                <div class="card-body text-center">
+                    <button class="btn btn-primary btn-abrir">Abrir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMBINE -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-modelo" onclick="clicarCard(this, 'combine-ganhe.html')">
+                <img 
+                    src="img/combine.jpg"
+                    data-hover="img/combine-hover.jpg"
+                    data-click="img/combine-click.jpg"
+                    class="img-card"
+                >
+                <div class="card-body text-center">
+                    <button class="btn btn-primary btn-abrir">Abrir</button>
+                </div>
+            </div>
+        </div>
+    
+         <!-- Desconto Progressivo -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-modelo" onclick="clicarCard(this, 'desconto_progressivo.html')">
+                <img 
+                    src="img/desconto.jpg"
+                    data-hover="img/desconto-houver.jpg"
+                    data-click="img/desconto-click.jpg"
+                    class="img-card"
+                >
+                <div class="card-body text-center">
+                    <button class="btn btn-primary btn-abrir">Abrir</button>
+                </div>
+            </div>
+        </div>
+
+         <!-- Ofertas App -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-modelo" onclick="clicarCard(this, 'app-exclusivo.html')">
+                <img 
+                    src="img/app.jpg"
+                    data-hover="img/app-houver.jpg"
+                    data-click="img/app-click.jpg"
+                    class="img-card"
+                >
+                <div class="card-body text-center">
+                    <button class="btn btn-primary btn-abrir">Abrir</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+    
+
+</div>
+
+
+<div class="bloco-logo">
+    <img src="img/logo.png" alt="Logo">
+</div>
+
+<script>
+
+/* =========================
+   HOVER (troca imagem)
+========================= */
+document.querySelectorAll('.img-card').forEach(img => {
+    const original = img.src;
+    const hover = img.dataset.hover;
+
+    img.addEventListener('mouseenter', () => {
+        if(hover) img.src = hover;
+    });
+
+    img.addEventListener('mouseleave', () => {
+        img.src = original;
+    });
+});
+
+/* =========================
+   CLICK (efeito botão)
+========================= */
+function clicarCard(card, pagina){
+    const img = card.querySelector('img');
+    const clickImg = img.dataset.click;
+
+    if(clickImg){
+        img.src = clickImg;
+    }
+
+    setTimeout(() => {
+        window.location.href = pagina;
+    }, 150);
+}
+
+</script>
+
+</body>
+</html>
