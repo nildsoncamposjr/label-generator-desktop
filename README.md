@@ -1,41 +1,84 @@
 # 🏷️ Label Generator Desktop
 ## Automação de criação de etiquetas promocionais
 
-Durante meu trabalho no setor de Marketing, identifiquei que a criação de etiquetas promocionais era realizada manualmente no Photoshop.
+📌 Sobre o projeto
 
-Cada etiqueta precisava ser editada individualmente, tornando o processo demorado, repetitivo e sujeito a erros.
+O Label Generator Desktop é uma aplicação desktop desenvolvida para automatizar a criação de etiquetas promocionais utilizadas no setor de Marketing e Trade Marketing.
 
-Além disso, diferentes campanhas exigiam diferentes modelos de etiquetas, aumentando ainda mais o tempo gasto pela equipe.
+O projeto surgiu a partir de uma necessidade real dentro do ambiente de trabalho, onde a produção de etiquetas era feita manualmente no Photoshop, exigindo edição individual de cada peça, o que gerava alto tempo de produção e retrabalho.
 
-A Solução
+A solução foi desenvolver um sistema capaz de importar dados de uma planilha Excel e gerar automaticamente etiquetas padronizadas, prontas para impressão.
 
-Desenvolvi uma aplicação desktop capaz de importar automaticamente uma planilha Excel contendo os produtos e gerar etiquetas prontas para impressão.
+❌ Problema
 
-O sistema organiza automaticamente as etiquetas em folhas A4, respeitando o layout de cada campanha promocional.
+Antes da automação, o processo apresentava os seguintes desafios:
 
-Principais funcionalidades
+Criação manual de etiquetas no Photoshop
+Alto tempo de produção por campanha
+Retrabalho frequente em ajustes visuais
+Falta de padronização entre modelos
+Dependência de edição manual por peça
+💡 Solução
 
-✔ Importação de planilhas Excel
+A aplicação foi desenvolvida para automatizar todo o fluxo de criação de etiquetas:
 
-✔ Geração automática de etiquetas
-
-✔ Diferentes layouts promocionais
-
-✔ Organização inteligente das folhas
-
-✔ Impressão otimizada
-
-✔ Interface desktop
-
-Tecnologias
+Importação de dados via planilha Excel
+Geração automática de etiquetas promocionais
+Padronização visual dos layouts
+Organização inteligente das etiquetas em folhas A4
+Otimização do processo de impressão
+⚙️ Funcionalidades
+Importação de arquivos Excel com produtos
+Geração automática de etiquetas
+Suporte a diferentes modelos promocionais
+Layouts otimizados para impressão em A4
+Interface desktop simples e funcional
+Organização automática das páginas de impressão
+🧰 Tecnologias utilizadas
 Electron
-HTML
-CSS
+HTML5
+CSS3
 JavaScript
 Bootstrap
 Node.js
-Impacto
+📊 Impacto
 
-O sistema reduziu significativamente o tempo gasto na criação das etiquetas utilizadas pelo setor de Marketing e Trade Marketing.
+A implementação do sistema trouxe melhorias significativas para o processo interno:
 
-Processos que anteriormente eram realizados manualmente passaram a ser automatizados, reduzindo retrabalho e padronizando a identidade visual das campanhas.
+Redução do tempo de criação de etiquetas
+Eliminação de tarefas manuais repetitivas
+Maior padronização visual das campanhas
+Aumento de produtividade da equipe de Marketing e Trade Marketing
+Redução de retrabalho e erros humanos
+📸 Demonstração
+🖥️ Interface do sistema
+
+(adicione aqui um print da tela inicial)
+
+📊 Importação de planilha Excel
+
+(adicione aqui um print da importação de dados)
+
+🏷️ Geração de etiquetas
+
+(adicione aqui um print das etiquetas geradas)
+
+🖨️ Layout de impressão
+
+(adicione aqui um print da pré-visualização)
+
+🚀 Próximas melhorias
+Exportação direta em PDF
+Editor visual de templates de etiquetas
+Histórico de gerações
+Sistema de login
+Modo de impressão automática
+Empacotamento em instalador (.exe)
+📁 Status do projeto
+
+🚧 Em desenvolvimento contínuo
+
+👨‍💻 Autor
+
+Desenvolvido por Nildson Campos
+Projeto criado para automação de processos internos e melhoria de produtividade no setor de Marketing.
