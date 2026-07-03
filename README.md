@@ -1,5 +1,5 @@
-Label Generator Desktop
-O Problema
+# 🏷️ Label Generator Desktop
+## Automação de criação de etiquetas promocionais
 
 Durante meu trabalho no setor de Marketing, identifiquei que a criação de etiquetas promocionais era realizada manualmente no Photoshop.
 
